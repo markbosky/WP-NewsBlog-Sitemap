@@ -131,6 +131,10 @@ echo $sitemap_output;`
 - Implement Caching (set_transient() or a static file cache).
 - Paginate If Needed to avoid performance issues.
 
+![Screenshot of WPEngine NGINX Rewrite Rule.](/img/WPEngine-Rewrite-Rule.png)
+
+![Screenshot of WPEngine NGINX Access Rule.](/img/WPEngine-Access-Rule.png)
+
 🚀 Recommended Final Setup
 - Move sitemap-news.php to /public_html/ (WordPress root).
 - Rewrite /sitemap-news.xml → /sitemap-news.php (via NGINX or WordPress function).
