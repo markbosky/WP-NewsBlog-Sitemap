@@ -15,19 +15,20 @@ To make your sitemap available at `https://yourwebsite.com/sitemap-news.xml`, fo
 `RewriteRule ^sitemap-news.xml$ sitemap-news.php [L]`
 
 If you're using NGINX, add this rule to your server block:
-
-`location = /sitemap-news.xml {
+```
+location = /sitemap-news.xml {
     rewrite ^ /sitemap-news.php last;
-}`
+}
+```
 
 
 3. For WordPress with Permalinks, you can add the following to functions.php to ensure the sitemap works properly:
-
-`function add_news_sitemap_rewrite_rule() {
+```
+function add_news_sitemap_rewrite_rule() {
     add_rewrite_rule('sitemap-news\.xml$', 'sitemap-news.php', 'top');
 }
 add_action('init', 'add_news_sitemap_rewrite_rule');`
-
+```
 Then flush permalinks by visiting Settings > Permalinks in WordPress and clicking "Save Changes."
 
 ## Step 3: Submit to Google Search Console
@@ -88,7 +89,8 @@ NGINX (Security Block)
 
 Caching Example (Update Every Hour)
 Add this inside sitemap-news.php:
-`$cached_sitemap = get_transient('cached_news_sitemap');
+```
+$cached_sitemap = get_transient('cached_news_sitemap');
 if ($cached_sitemap) {
     echo $cached_sitemap;
     exit;
@@ -102,7 +104,8 @@ ob_start(); // Start output buffering
 $sitemap_output = ob_get_clean(); // Get output and clear buffer
 set_transient('cached_news_sitemap', $sitemap_output, HOUR_IN_SECONDS); // Cache for 1 hour
 
-echo $sitemap_output;`
+echo $sitemap_output;
+```
 
 🚀 Result: The sitemap only regenerates once per hour, reducing database load.
 - How This Works
@@ -120,7 +123,6 @@ echo $sitemap_output;`
 		- Example: Paginated Sitemap
 
 		- Instead of one large sitemap:
-
 			- Generate sitemap-news-1.xml, sitemap-news-2.xml dynamically.
 			- Create sitemap-news-index.xml listing all smaller sitemaps.
 
@@ -163,8 +165,8 @@ You can create a simple admin page where you click a button to clear the cache.
 
 #### 📌 Steps
 1. Add this code to your theme’s functions.php or a custom plugin:
-
-`function news_sitemap_admin_page() {
+```
+function news_sitemap_admin_page() {
     add_menu_page(
         'News Sitemap Cache',
         'News Sitemap Cache',
@@ -176,21 +178,22 @@ You can create a simple admin page where you click a button to clear the cache.
 add_action('admin_menu', 'news_sitemap_admin_page');
 
 function news_sitemap_cache_page() {
-    if (isset($_POST[\'clear_cache\'])) {
-        delete_transient(\'cached_news_sitemap\');
+    if (isset($_POST['clear_cache'])) {
+        delete_transient('cached_news_sitemap');
         echo '<div class="updated"><p><strong>Sitemap cache cleared successfully!</strong></p></div>';
     }
-    ?>`
-    ```html
+    ?>
+    
     <div class="wrap">
         <h1>Clear News Sitemap Cache</h1>
         <form method="post">
             <input type="submit" name="clear_cache" class="button button-primary" value="Clear Cache Now">
         </form>
     </div>
-    ```
-    `<?php
-}`
+    
+    <?php
+}
+```
 
 ### 📌 How It Works
 - This creates a "News Sitemap Cache" page under WordPress Admin > News Sitemap Cache.
