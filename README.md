@@ -176,18 +176,20 @@ You can create a simple admin page where you click a button to clear the cache.
 add_action('admin_menu', 'news_sitemap_admin_page');
 
 function news_sitemap_cache_page() {
-    if (isset($_POST['clear_cache'])) {
-        delete_transient('cached_news_sitemap');
+    if (isset($_POST[\'clear_cache\'])) {
+        delete_transient(\'cached_news_sitemap\');
         echo '<div class="updated"><p><strong>Sitemap cache cleared successfully!</strong></p></div>';
     }
-    ?>
+    ?>`
+    ```html
     <div class="wrap">
         <h1>Clear News Sitemap Cache</h1>
         <form method="post">
             <input type="submit" name="clear_cache" class="button button-primary" value="Clear Cache Now">
         </form>
     </div>
-    <?php
+    ```
+    `<?php
 }`
 
 ### 📌 How It Works
@@ -200,7 +202,8 @@ If you want a direct URL-based cache clearing method:
 1. Create a new file: clear-sitemap-cache.php inside your WordPress root directory (/public_html/).
 2. Add this code:
 
-`<?php
+```
+<?php
 // Load WordPress Core
 require_once( $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php' );
 
@@ -213,7 +216,8 @@ if (!is_user_logged_in() || !current_user_can('manage_options')) {
 delete_transient('cached_news_sitemap');
 
 echo 'Sitemap cache cleared successfully!';
-?>`
+?>
+```
 
 3. Access it in your browser:
 `https://yourwebsite.com/clear-sitemap-cache.php`
