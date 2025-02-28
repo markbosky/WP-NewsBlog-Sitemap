@@ -1,4 +1,4 @@
-# WP-NewsBlog-Sitemap
+# WordPress Custom NewsBlog Sitemap
 Generate custom 'News' XML sitemap for all /blog/ posts in WordPress
 
 ## Step 1: Create a Custom Sitemap PHP File
