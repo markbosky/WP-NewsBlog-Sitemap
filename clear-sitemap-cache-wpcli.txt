@@ -1,6 +1,0 @@
-🔹 Option 3: Use WP-CLI to Clear Cache
-If you have command-line access, run:
-
-wp transient delete cached_news_sitemap
-
-This instantly clears the cache without needing a web interface.
